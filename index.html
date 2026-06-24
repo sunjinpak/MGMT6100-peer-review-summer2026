@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Peer Review Evaluation - MGMT 6100</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="survey-header">
+      <h1 id="course-title"></h1>
+      <p>Self and Peer Evaluation Survey</p>
+    </div>
+
+    <!-- Progress -->
+    <div class="card">
+      <div class="card-content" style="padding: 16px 24px;">
+        <div class="step-indicator">
+          <div class="step-dot" data-step="1"></div>
+          <div class="step-dot" data-step="2"></div>
+          <div class="step-dot" data-step="3"></div>
+          <div class="step-dot" data-step="4"></div>
+          <div class="step-dot" data-step="5"></div>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Error Message -->
+    <div class="error-message" id="error-message"></div>
+
+    <!-- Section 1: Activity Selection -->
+    <div class="section active" id="section-1">
+      <div class="card">
+        <div class="card-content">
+          <h2 class="card-title required">Select a team activity you want to rate</h2>
+          <div class="form-group">
+            <select id="activity-select">
+              <option value="">Choose an activity...</option>
+            </select>
+          </div>
+        </div>
+        <div class="button-group">
+          <div></div>
+          <button class="btn btn-primary" id="btn-next-1" disabled>Next</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 2: Team Selection -->
+    <div class="section" id="section-2">
+      <div class="card">
+        <div class="card-content">
+          <h2 class="card-title required">Please choose your team number</h2>
+          <p class="note">If there is a student who dropped the class but still appears in the survey, please let me know.</p>
+          <div class="radio-group" id="team-options">
+          </div>
+        </div>
+        <div class="button-group">
+          <button class="btn btn-secondary" id="btn-back-2">Back</button>
+          <button class="btn btn-primary" id="btn-next-2" disabled>Next</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 3: Name Selection -->
+    <div class="section" id="section-3">
+      <div class="card">
+        <div class="card-content">
+          <h2 class="card-title" id="team-label">You are Team X</h2>
+          <h3 class="card-title required" style="margin-top: 16px;">What is your name?</h3>
+          <div class="radio-group" id="name-options">
+          </div>
+        </div>
+        <div class="button-group">
+          <button class="btn btn-secondary" id="btn-back-3">Back</button>
+          <button class="btn btn-primary" id="btn-next-3" disabled>Next</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 4: Rating -->
+    <div class="section" id="section-4">
+      <div class="card">
+        <div class="card-content">
+          <h2 class="card-title required">Please assess the work of you and your colleagues</h2>
+          <p style="font-size: 14px; color: #5f6368; margin-bottom: 20px;">
+            We will consider your feedback in assigning the grade for the team activity.
+            Please try to be as honest and fair as possible in your assessment.
+            If a team member missed the meeting without any notice, please mark as "Little or weak effort" for the record.
+          </p>
+
+          <div class="rating-matrix">
+            <table class="rating-table">
+              <thead>
+                <tr class="rating-labels">
+                  <th></th>
+                  <th><span class="rating-label-text">Little/weak effort</span></th>
+                  <th><span class="rating-label-text">Insufficient effort</span></th>
+                  <th><span class="rating-label-text">Sufficient effort</span></th>
+                  <th><span class="rating-label-text">Very strong work</span></th>
+                  <th><span class="rating-label-text">Excellent work</span></th>
+                </tr>
+                <tr>
+                  <th></th>
+                  <th>1</th>
+                  <th>2</th>
+                  <th>3</th>
+                  <th>4</th>
+                  <th>5</th>
+                </tr>
+              </thead>
+              <tbody id="rating-tbody">
+              </tbody>
+            </table>
+          </div>
+
+          <div class="rating-legend">
+            <h4>Rating Scale</h4>
+            <ul>
+              <li><strong>1:</strong> Little or weak effort / Detrimental to team</li>
+              <li><strong>2:</strong> Insufficient effort / Met minimal standards of team</li>
+              <li><strong>3:</strong> Sufficient effort / Contributed adequately to team</li>
+              <li><strong>4:</strong> Very strong work / Contributed significantly to team</li>
+              <li><strong>5:</strong> Excellent work / Was crucial component to team's success</li>
+            </ul>
+          </div>
+        </div>
+        <div class="button-group">
+          <button class="btn btn-secondary" id="btn-back-4">Back</button>
+          <button class="btn btn-primary" id="btn-submit" disabled>Submit</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 5: Completion -->
+    <div class="section" id="section-5">
+      <div class="card">
+        <div class="card-content">
+          <div class="completion-code">
+            <h2>Thank you for your submission!</h2>
+            <p style="margin-top: 16px;">Here is your completion code:</p>
+            <div class="code-display" id="completion-code">---</div>
+            <div class="completion-instructions">
+              <p>Please send this completion code to the notetaker of the current week meeting.</p>
+              <p style="margin-top: 12px;"><strong>Click on a team member below to send them an email with your completion code:</strong></p>
+              <p style="margin-top: 8px; font-size: 12px; color: #888;">On smartphone, clicking will open your email app with the completion code already filled in.</p>
+            </div>
+          </div>
+
+          <div class="email-buttons" id="email-buttons">
+            <!-- Will be populated dynamically -->
+          </div>
+
+          <div class="notetaker-table">
+            <h4>Notetaker needs to collect all of the survey completion code from your group members.</h4>
+            <table>
+              <thead>
+                <tr>
+                  <th>Student names</th>
+                  <th>Survey Completion Code</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Sample Student</td><td>21409180192</td></tr>
+                <tr><td>1.</td><td></td></tr>
+                <tr><td>2.</td><td></td></tr>
+                <tr><td>3.</td><td></td></tr>
+                <tr><td>4.</td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading -->
+    <div class="loading" id="loading">
+      <div class="spinner"></div>
+      <p>Submitting your response...</p>
+    </div>
+  </div>
+
+  <script src="teams.js"></script>
+  <script>
+    // State
+    let currentStep = 1;
+    let selectedActivity = '';
+    let selectedTeam = null;
+    let selectedName = '';
+    let ratings = {};
+    let completionCode = '';
+    let clientInfo = {};
+
+    // Collect client info
+    function collectClientInfo() {
+      return {
+        userAgent: navigator.userAgent,
+        language: navigator.language,
+        platform: navigator.platform,
+        screenWidth: screen.width,
+        screenHeight: screen.height,
+        windowWidth: window.innerWidth,
+        windowHeight: window.innerHeight,
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        timezoneOffset: new Date().getTimezoneOffset(),
+        referrer: document.referrer || 'direct',
+        cookiesEnabled: navigator.cookieEnabled,
+        onLine: navigator.onLine,
+        timestamp: new Date().toISOString(),
+        ipAddress: ''
+      };
+    }
+
+    // Fetch IP address from external API
+    async function fetchIPAddress() {
+      try {
+        const response = await fetch('https://api.ipify.org?format=json');
+        const data = await response.json();
+        clientInfo.ipAddress = data.ip;
+      } catch (error) {
+        clientInfo.ipAddress = 'unavailable';
+      }
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', async function() {
+      clientInfo = collectClientInfo();
+      await fetchIPAddress();
+      initializeSurvey();
+      setupEventListeners();
+    });
+
+    function initializeSurvey() {
+      // Set course title
+      document.getElementById('course-title').textContent = SURVEY_CONFIG.course;
+
+      // Populate activities
+      const activitySelect = document.getElementById('activity-select');
+      SURVEY_CONFIG.activities.forEach(activity => {
+        const option = document.createElement('option');
+        option.value = activity;
+        option.textContent = activity;
+        activitySelect.appendChild(option);
+      });
+
+      // Populate teams
+      const teamOptions = document.getElementById('team-options');
+      SURVEY_CONFIG.teams.forEach(team => {
+        const div = document.createElement('div');
+        div.className = 'radio-option';
+        div.innerHTML = `
+          <input type="radio" name="team" value="${team.number}" id="team-${team.number}">
+          <div class="option-content">
+            <div class="option-label">Team ${team.number}</div>
+            <div class="option-members">${team.members.join(', ')}</div>
+          </div>
+        `;
+        div.addEventListener('click', function() {
+          document.getElementById(`team-${team.number}`).checked = true;
+          selectTeam(team.number);
+        });
+        teamOptions.appendChild(div);
+      });
+
+      updateProgress();
+    }
+
+    function setupEventListeners() {
+      // Activity selection
+      document.getElementById('activity-select').addEventListener('change', function() {
+        selectedActivity = this.value;
+        document.getElementById('btn-next-1').disabled = !selectedActivity;
+      });
+
+      // Navigation buttons
+      document.getElementById('btn-next-1').addEventListener('click', () => goToStep(2));
+      document.getElementById('btn-back-2').addEventListener('click', () => goToStep(1));
+      document.getElementById('btn-next-2').addEventListener('click', () => goToStep(3));
+      document.getElementById('btn-back-3').addEventListener('click', () => goToStep(2));
+      document.getElementById('btn-next-3').addEventListener('click', () => goToStep(4));
+      document.getElementById('btn-back-4').addEventListener('click', () => goToStep(3));
+      document.getElementById('btn-submit').addEventListener('click', submitSurvey);
+    }
+
+    function selectTeam(teamNumber) {
+      selectedTeam = SURVEY_CONFIG.teams.find(t => t.number === teamNumber);
+
+      // Update UI
+      document.querySelectorAll('#team-options .radio-option').forEach(opt => {
+        opt.classList.remove('selected');
+      });
+      document.querySelector(`#team-options .radio-option:nth-child(${teamNumber})`).classList.add('selected');
+
+      document.getElementById('btn-next-2').disabled = false;
+    }
+
+    function goToStep(step) {
+      // Hide current section
+      document.getElementById(`section-${currentStep}`).classList.remove('active');
+
+      // Prepare next section
+      if (step === 3) {
+        populateNameOptions();
+      } else if (step === 4) {
+        populateRatingMatrix();
+      } else if (step === 5) {
+        populateEmailButtons();
+      }
+
+      // Show next section
+      document.getElementById(`section-${step}`).classList.add('active');
+      currentStep = step;
+      updateProgress();
+
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function populateNameOptions() {
+      document.getElementById('team-label').textContent = `You are Team ${selectedTeam.number}`;
+
+      const nameOptions = document.getElementById('name-options');
+      nameOptions.innerHTML = '';
+
+      selectedTeam.members.forEach((member, index) => {
+        const div = document.createElement('div');
+        div.className = 'radio-option';
+        div.innerHTML = `
+          <input type="radio" name="name" value="${member}" id="name-${index}">
+          <div class="option-content">
+            <div class="option-label">${member}</div>
+          </div>
+        `;
+        div.addEventListener('click', function() {
+          document.getElementById(`name-${index}`).checked = true;
+          selectName(member);
+        });
+        nameOptions.appendChild(div);
+      });
+    }
+
+    function selectName(name) {
+      selectedName = name;
+
+      // Update UI
+      document.querySelectorAll('#name-options .radio-option').forEach(opt => {
+        opt.classList.remove('selected');
+      });
+      const selectedOpt = document.querySelector(`input[name="name"][value="${name}"]`);
+      if (selectedOpt) {
+        selectedOpt.closest('.radio-option').classList.add('selected');
+      }
+
+      document.getElementById('btn-next-3').disabled = false;
+    }
+
+    function populateRatingMatrix() {
+      const tbody = document.getElementById('rating-tbody');
+      tbody.innerHTML = '';
+      ratings = {};
+
+      selectedTeam.members.forEach((member, index) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${member}</td>
+          ${[1,2,3,4,5].map(rating => `
+            <td>
+              <input type="radio" name="rating-${index}" value="${rating}"
+                     onchange="setRating('${member}', ${rating})">
+            </td>
+          `).join('')}
+        `;
+        tbody.appendChild(tr);
+      });
+
+      checkAllRatings();
+    }
+
+    function setRating(member, rating) {
+      ratings[member] = rating;
+      checkAllRatings();
+    }
+
+    function checkAllRatings() {
+      const allRated = selectedTeam.members.every(member => ratings[member]);
+      document.getElementById('btn-submit').disabled = !allRated;
+    }
+
+    function updateProgress() {
+      const progress = (currentStep / 5) * 100;
+      document.getElementById('progress-fill').style.width = `${progress}%`;
+
+      document.querySelectorAll('.step-dot').forEach((dot, index) => {
+        dot.classList.remove('active', 'completed');
+        if (index + 1 === currentStep) {
+          dot.classList.add('active');
+        } else if (index + 1 < currentStep) {
+          dot.classList.add('completed');
+        }
+      });
+    }
+
+    function populateEmailButtons() {
+      const container = document.getElementById('email-buttons');
+      container.innerHTML = '';
+
+      const teamData = SURVEY_CONFIG.teams.find(t => t.number === selectedTeam.number);
+      if (!teamData) return;
+
+      teamData.members.forEach((member, index) => {
+        // Get email from roster (stored in teams.js)
+        const email = SURVEY_CONFIG.emails && SURVEY_CONFIG.emails[member]
+          ? SURVEY_CONFIG.emails[member]
+          : '';
+
+        const mailtoLink = `mailto:${email}?subject=Peer Review Completion Code - ${selectedActivity}&body=Hi ${member.split(' ')[0]},%0D%0A%0D%0AMy completion code for ${selectedActivity} is: ${completionCode}%0D%0A%0D%0AFrom: ${selectedName}`;
+
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'email-btn';
+        btn.innerHTML = `<span class="email-icon">✉</span> <span class="email-btn-content"><span class="email-btn-name">${member}</span><span class="email-btn-address" onclick="event.stopPropagation()">${email}</span></span>`;
+        btn.addEventListener('click', function() {
+          window.location.href = mailtoLink;
+        });
+        container.appendChild(btn);
+      });
+    }
+
+    function submitSurvey() {
+      const submitBtn = document.getElementById('btn-submit');
+      const loading = document.getElementById('loading');
+      const errorMsg = document.getElementById('error-message');
+
+      submitBtn.disabled = true;
+      loading.classList.add('active');
+      errorMsg.classList.remove('active');
+
+      const data = {
+        activity: selectedActivity,
+        team: selectedTeam.number,
+        respondent: selectedName,
+        ratings: selectedTeam.members.map(member => ({
+          member: member,
+          rating: ratings[member]
+        }))
+      };
+
+      // Generate completion code locally
+      completionCode = Math.floor(Math.random() * 900) + 100;
+
+      // Create hidden iframe for form submission
+      const iframeName = 'submit-iframe-' + Date.now();
+      const iframe = document.createElement('iframe');
+      iframe.name = iframeName;
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
+
+      // Create hidden form
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = SURVEY_CONFIG.apiUrl;
+      form.target = iframeName;
+      form.style.display = 'none';
+
+      // Add form fields
+      const fields = {
+        activity: data.activity,
+        team: data.team,
+        respondent: data.respondent,
+        completionCode: completionCode,
+        // Client info
+        userAgent: clientInfo.userAgent,
+        language: clientInfo.language,
+        platform: clientInfo.platform,
+        screenSize: `${clientInfo.screenWidth}x${clientInfo.screenHeight}`,
+        windowSize: `${clientInfo.windowWidth}x${clientInfo.windowHeight}`,
+        timezone: clientInfo.timezone,
+        timezoneOffset: clientInfo.timezoneOffset,
+        referrer: clientInfo.referrer,
+        cookiesEnabled: clientInfo.cookiesEnabled,
+        onLine: clientInfo.onLine,
+        clientTimestamp: clientInfo.timestamp,
+        ipAddress: clientInfo.ipAddress
+      };
+
+      // Add each member rating as separate field
+      data.ratings.forEach((r, i) => {
+        fields['member' + (i + 1)] = r.member;
+        fields['rating' + (i + 1)] = r.rating;
+      });
+
+      for (const [key, value] of Object.entries(fields)) {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = key;
+        input.value = value;
+        form.appendChild(input);
+      }
+
+      document.body.appendChild(form);
+
+      // Submit form
+      form.submit();
+
+      // Show completion after short delay
+      setTimeout(() => {
+        loading.classList.remove('active');
+        document.getElementById('completion-code').textContent = completionCode;
+        goToStep(5);
+
+        // Cleanup
+        document.body.removeChild(form);
+        document.body.removeChild(iframe);
+      }, 1500);
+    }
+  </script>
+</body>
+</html>
