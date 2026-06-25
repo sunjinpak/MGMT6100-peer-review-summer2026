@@ -432,7 +432,7 @@
       });
     }
 
-    function submitSurvey() {
+    async function submitSurvey() {
       const submitBtn = document.getElementById('btn-submit');
       const loading = document.getElementById('loading');
       const errorMsg = document.getElementById('error-message');
@@ -451,24 +451,11 @@
         }))
       };
 
-      // Generate completion code locally
-      completionCode = Math.floor(Math.random() * 900) + 100;
+      // Generate a near-unique completion code (time-based + random) so the
+      // notetaker and instructor can match it against the saved Sheet row.
+      completionCode = String(Date.now()).slice(-7) + String(Math.floor(Math.random() * 90) + 10);
 
-      // Create hidden iframe for form submission
-      const iframeName = 'submit-iframe-' + Date.now();
-      const iframe = document.createElement('iframe');
-      iframe.name = iframeName;
-      iframe.style.display = 'none';
-      document.body.appendChild(iframe);
-
-      // Create hidden form
-      const form = document.createElement('form');
-      form.method = 'POST';
-      form.action = SURVEY_CONFIG.apiUrl;
-      form.target = iframeName;
-      form.style.display = 'none';
-
-      // Add form fields
+      // Build form-encoded payload (CORS-safe, no preflight; matches doPost e.parameter).
       const fields = {
         activity: data.activity,
         team: data.team,
@@ -495,29 +482,36 @@
         fields['rating' + (i + 1)] = r.rating;
       });
 
+      const body = new URLSearchParams();
       for (const [key, value] of Object.entries(fields)) {
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = key;
-        input.value = value;
-        form.appendChild(input);
+        body.append(key, value);
       }
 
-      document.body.appendChild(form);
+      // Submit and ONLY show the completion code if the server confirms the row was saved.
+      try {
+        const response = await fetch(SURVEY_CONFIG.apiUrl, { method: 'POST', body: body });
+        let result = null;
+        try { result = await response.json(); } catch (e) { /* non-JSON = not a real success */ }
 
-      // Submit form
-      form.submit();
+        if (!response.ok || !result || result.result !== 'success') {
+          const reason = (result && result.error) ? result.error : ('server response ' + response.status);
+          throw new Error(reason);
+        }
 
-      // Show completion after short delay
-      setTimeout(() => {
+        // Confirmed saved to the Google Sheet.
         loading.classList.remove('active');
         document.getElementById('completion-code').textContent = completionCode;
         goToStep(5);
-
-        // Cleanup
-        document.body.removeChild(form);
-        document.body.removeChild(iframe);
-      }, 1500);
+      } catch (err) {
+        // Save did NOT succeed. Do not show a code; let the student retry.
+        loading.classList.remove('active');
+        submitBtn.disabled = false;
+        errorMsg.textContent = 'Your response was NOT saved (' + (err.message || 'network error') +
+          '). Please check your internet connection and click Submit again. ' +
+          'If it keeps failing, contact Professor Pak. Do not report a completion code unless this page shows one.';
+        errorMsg.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
     }
   </script>
 </body>
