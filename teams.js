@@ -13,7 +13,7 @@ const SURVEY_CONFIG = {
   ],
 
   teams: [
-    { number: 1, members: ["Gabriel Adame", "Rosalinda Altamirano", "Inderjot Athwal", "Husain Cassim"] },
+    { number: 1, members: ["Gabriel Adame", "Inderjot Athwal"] },
     { number: 2, members: ["Andrew Dickenson", "Daniel Esmond", "Zenaida Gamino", "Samuel Marcus"] },
     { number: 3, members: ["Nicholas Mascaro", "Michelle Moss", "Tony Pacheco"] },
     { number: 4, members: ["Breanna Polk", "Crystalyna Rodriguez", "Denise Romero"] },
@@ -32,9 +32,7 @@ const SURVEY_CONFIG = {
   emails: {
     // Team 1
     "Gabriel Adame": "gadame1@csub.edu",
-    "Rosalinda Altamirano": "laltamirano2@csub.edu",
     "Inderjot Athwal": "iathwal@csub.edu",
-    "Husain Cassim": "hcassim@csub.edu",
     // Team 2
     "Andrew Dickenson": "adickenson@csub.edu",
     "Daniel Esmond": "desmond@csub.edu",
