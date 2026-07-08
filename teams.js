@@ -18,7 +18,7 @@ const SURVEY_CONFIG = {
     { number: 3, members: ["Nicholas Mascaro", "Michelle Moss", "Tony Pacheco"] },
     { number: 4, members: ["Breanna Polk", "Crystalyna Rodriguez", "Denise Romero"] },
     { number: 5, members: ["Robert Salvador", "Reece Stevenson", "Kendall Trotter"] },
-    { number: 6, members: ["Luis Vaca-Corona", "Adriana Van Grinsven", "Sarah Watkins"] }
+    { number: 6, members: ["Luis Vaca-Corona", "Adriana Van Grinsven", "Sarah Watkins", "Scott Swan"] }
   ],
 
   ratingScale: [
@@ -53,6 +53,7 @@ const SURVEY_CONFIG = {
     // Team 6
     "Luis Vaca-Corona": "lvaca@csub.edu",
     "Adriana Van Grinsven": "avangrinsven@csub.edu",
-    "Sarah Watkins": "swatkins5@csub.edu"
+    "Sarah Watkins": "swatkins5@csub.edu",
+    "Scott Swan": "sswan1@csub.edu"
   }
 };
