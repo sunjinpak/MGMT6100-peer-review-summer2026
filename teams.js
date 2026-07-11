@@ -16,7 +16,7 @@ const SURVEY_CONFIG = {
     { number: 1, members: ["Gabriel Adame", "Inderjot Athwal"] },
     { number: 2, members: ["Andrew Dickenson", "Daniel Esmond", "Zenaida Gamino", "Samuel Marcus"] },
     { number: 3, members: ["Nicholas Mascaro", "Michelle Moss", "Tony Pacheco"] },
-    { number: 4, members: ["Breanna Polk", "Crystalyna Rodriguez", "Denise Romero"] },
+    { number: 4, members: ["Breanna Polk", "Denise Romero"] },
     { number: 5, members: ["Robert Salvador", "Reece Stevenson", "Kendall Trotter"] },
     { number: 6, members: ["Luis Vaca-Corona", "Adriana Van Grinsven", "Sarah Watkins", "Scott Swan"] }
   ],
@@ -44,7 +44,6 @@ const SURVEY_CONFIG = {
     "Tony Pacheco": "jpacheco5@csub.edu",
     // Team 4
     "Breanna Polk": "bpolk1@csub.edu",
-    "Crystalyna Rodriguez": "crodriguez75@csub.edu",
     "Denise Romero": "dromero12@csub.edu",
     // Team 5
     "Robert Salvador": "rsalvador1@csub.edu",
