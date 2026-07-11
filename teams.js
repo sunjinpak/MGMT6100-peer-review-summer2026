@@ -51,7 +51,7 @@ const SURVEY_CONFIG = {
     "Kendall Trotter": "ktrotter1@csub.edu",
     // Team 6
     "Luis Vaca-Corona": "lvaca@csub.edu",
-    "Adriana Van Grinsven": "avangrinsven@csub.edu",
+    "Adriana Van Grinsven": "avan-grinsven@csub.edu",
     "Sarah Watkins": "swatkins5@csub.edu",
     "Scott Swan": "sswan1@csub.edu"
   }
