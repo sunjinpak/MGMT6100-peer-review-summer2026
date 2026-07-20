@@ -3,13 +3,15 @@ const SURVEY_CONFIG = {
   course: "MGMT 6100 Seminar in Human Resource Management (Summer 2026)",
   apiUrl: "https://script.google.com/macros/s/AKfycbzoffiaSskV0Y74mth2mJZS-cQH634CvAAY7GMVBqGhcQVRy9d-VrkIOyAeSWJN3VkW/exec",
 
+  // Labels carry the week number so students do not read "Team meeting 5"
+  // as "Team 5's meeting" and pick by their own team number.
   activities: [
-    "Team meeting 1",
-    "Team meeting 2",
-    "Team meeting 3",
-    "Team meeting 4",
-    "Team meeting 5",
-    "Team Presentation (Dates vary between teams)"
+    "Week 1 Team Meeting",
+    "Week 2 Team Meeting",
+    "Week 3 Team Meeting",
+    "Week 4 Team Meeting",
+    "Week 5 Team Meeting",
+    "Team Presentation (the week your team presents)"
   ],
 
   teams: [
